@@ -1,7 +1,9 @@
+import 'package:belajar_flutter_1/datewidget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'Gambar_Widget.dart';
 import 'dialog.dart';
+import 'datewidget.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   const ScaffoldWidget({super.key});
@@ -22,7 +24,8 @@ class ScaffoldWidget extends StatelessWidget {
         child: Column(
           children: [
             GambarWidget(),
-            DialogWidget()
+            DialogWidget(),
+            Datewidget()
           ],
         )
       ),
