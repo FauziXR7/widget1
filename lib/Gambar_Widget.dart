@@ -5,6 +5,6 @@ class GambarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image(image: AssetImage('asset/20240701103037.png'));
+    return Image(image: AssetImage('asset/raiden.png'));
   }
 }

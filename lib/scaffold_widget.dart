@@ -26,6 +26,7 @@ class ScaffoldWidget extends StatelessWidget {
             GambarWidget(),
             DialogWidget(),
             Datewidget()
+            
           ],
         )
       ),
