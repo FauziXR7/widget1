@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
             //Dialog()
             //RowColumn()
             //StackPosition()
-            //Tugas()
+            Tugas()
                     //Tes()
         //Tugaspakarifin()
         );

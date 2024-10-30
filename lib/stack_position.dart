@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 import 'package:flutter/material.dart';
 
 class StackPosition extends StatelessWidget {
@@ -58,4 +55,3 @@ class StackPosition extends StatelessWidget {
     );
   }
 }
->>>>>>> 3671095ae2e623fce880bc216ad5d76e72f694bf
