@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '';
 
 class Tugas extends StatelessWidget {
   const Tugas({super.key});
@@ -51,14 +50,14 @@ class _TradingHomeState extends State<TradingHome> {
       const Padding(
         padding: EdgeInsets.all(16.0),
         child: Text(
-          'Market Overview',
+          'Home Page',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ),
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Text(
-          'IDX 30',
+          'Perpus Main Page',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
       ),
@@ -138,10 +137,36 @@ class _TradingHomeState extends State<TradingHome> {
       appBar: AppBar(
         title: const Text('Portfolio'),
       ),
-      body: Center(
-        child: Text(
-          'Halaman Portofolio',
-          style: TextStyle(fontSize: 24),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Portfolio Summary Cards
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildSummaryCard('Total Value', '\25.000', Colors.blue),
+                _buildSummaryCard('Invested', '\20.000', Colors.orange),
+                _buildSummaryCard('Gain/Loss', '+\5.000', Colors.green),
+              ],
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Your Stocks',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildPortfolioStockRow('BBCA', '10.250', '100', '+5.25%'),
+                  _buildPortfolioStockRow('BBRI', '5200', '50', '-1.50%'),
+                  _buildPortfolioStockRow('TLKM', '3040', '150', '+2.00%'),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -152,10 +177,96 @@ class _TradingHomeState extends State<TradingHome> {
       appBar: AppBar(
         title: const Text('Transactions'),
       ),
-      body: Center(
-        child: Text(
-          'Halaman Transaksi',
-          style: TextStyle(fontSize: 24),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Recent Transactions',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildTransactionRow(
+                      'BBCA', 'Buy', '10', '\10.000', '05 Nov 2024'),
+                  _buildTransactionRow(
+                      'BBRI', 'Sell', '20', '\15.000', '03 Nov 2024'),
+                  _buildTransactionRow(
+                      'TLKM', 'Buy', '30', '\8.000', '01 Nov 2024'),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSummaryCard(String title, String value, Color color) {
+    return Expanded(
+      child: Card(
+        color: color.withOpacity(0.1),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Text(
+                title,
+                style: TextStyle(fontSize: 14, color: color),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                value,
+                style: TextStyle(
+                    fontSize: 16, fontWeight: FontWeight.bold, color: color),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPortfolioStockRow(
+      String ticker, String price, String quantity, String change) {
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Colors.blueGrey.shade100,
+          child: Text(
+            ticker[0],
+            style: const TextStyle(color: Colors.blueGrey),
+          ),
+        ),
+        title: Text(ticker),
+        subtitle: Text('Price: \$${price} | Quantity: ${quantity}'),
+        trailing: Text(
+          change,
+          style: TextStyle(
+            color: change.contains('+') ? Colors.green : Colors.red,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTransactionRow(
+      String ticker, String type, String quantity, String value, String date) {
+    return Card(
+      child: ListTile(
+        leading: Icon(
+          type == 'Buy' ? Icons.arrow_upward : Icons.arrow_downward,
+          color: type == 'Buy' ? Colors.green : Colors.red,
+        ),
+        title: Text('$ticker - $type'),
+        subtitle: Text('Quantity: $quantity | Value: $value'),
+        trailing: Text(
+          date,
+          style: const TextStyle(color: Colors.grey),
         ),
       ),
     );
